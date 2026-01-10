@@ -1,0 +1,20 @@
+.error {
+  color: red;
+}
+
+html,
+body {
+  background: #ddd;
+}
+
+.container {
+  background: #fff;
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+input {
+  width: 100%;
+}
