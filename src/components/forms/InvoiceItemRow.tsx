@@ -1,8 +1,12 @@
 import { currencyFormatter } from "@/utils/currency-utils";
 import { calculateItemTotal } from "@/utils/invoice-utils";
 import { memo, useCallback } from "react";
-import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
-import { Controller, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useFormContext,
+  useFormState,
+  useWatch,
+} from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
 import type {
@@ -12,21 +16,27 @@ import type {
 
 export type InvoiceItemRowProps = {
   fieldId: string;
-  register: UseFormRegister<InvoiceFormValues>;
   index: number;
-  errors: FieldErrors<InvoiceFormValues>;
-  control: Control<InvoiceFormValues>;
   onRemove: (index: number) => void;
 };
 
 const InvoiceItemRowBase = ({
   fieldId,
-  register,
   index,
-  errors,
-  control,
   onRemove,
 }: InvoiceItemRowProps) => {
+  const { control, register } = useFormContext<InvoiceFormValues>();
+  const { errors } = useFormState({
+    control,
+    name: [
+      `items.${index}.name`,
+      `items.${index}.price`,
+      `items.${index}.quantity`,
+      `items.${index}.discount`,
+    ],
+  });
+  const rowErrors = errors.items?.[index];
+
   const item = useWatch({ control, name: `items.${index}` }) as
     | InvoiceFormItemValues
     | undefined;
@@ -46,7 +56,7 @@ const InvoiceItemRowBase = ({
           id={`items-${fieldId}-name`}
           {...register(`items.${index}.name`)}
         />
-        <div className="error">{errors.items?.[index]?.name?.message}</div>
+        <div className="error">{rowErrors?.name?.message}</div>
       </td>
       {/* end of NAME */}
 
@@ -74,7 +84,7 @@ const InvoiceItemRowBase = ({
             />
           )}
         />
-        <div className="error">{errors.items?.[index]?.price?.message}</div>
+        <div className="error">{rowErrors?.price?.message}</div>
       </td>
       {/* end of PRICE */}
 
@@ -87,7 +97,7 @@ const InvoiceItemRowBase = ({
           })}
           type="number"
         />
-        <div className="error">{errors.items?.[index]?.quantity?.message}</div>
+        <div className="error">{rowErrors?.quantity?.message}</div>
       </td>
 
       {/* end of QUANTITY */}
@@ -101,7 +111,7 @@ const InvoiceItemRowBase = ({
           })}
           type="number"
         />
-        <div className="error">{errors.items?.[index]?.discount?.message}</div>
+        <div className="error">{rowErrors?.discount?.message}</div>
       </td>
       {/* end of DISCOUNT */}
 

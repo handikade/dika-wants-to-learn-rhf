@@ -1,16 +1,16 @@
 import FormGrid from "@/components/FormGrid";
 import FormSection from "@/components/FormSection";
 import FormSectionTitle from "@/components/FormSectionTitle";
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import type { InvoiceFormValues } from "@/schemas/invoice-schema";
 
-export type InvoiceDetailProps = {
-  register: UseFormRegister<InvoiceFormValues>;
-  errors: FieldErrors<InvoiceFormValues>;
-};
+const InvoiceDetail = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<InvoiceFormValues>();
 
-const InvoiceDetail = ({ register, errors }: InvoiceDetailProps) => {
   return (
     <FormSection>
       <FormSectionTitle>Invoice Detail</FormSectionTitle>

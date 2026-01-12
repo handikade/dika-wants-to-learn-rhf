@@ -1,14 +1,12 @@
-import { currencyFormatter } from "@/utils/currency-utils.ts";
-import { calculateItemTotal } from "@/utils/invoice-utils.ts";
+import { currencyFormatter } from "@/utils/currency-utils";
+import { calculateItemTotal } from "@/utils/invoice-utils";
 import { useMemo } from "react";
-import { useWatch, type Control } from "react-hook-form";
-import type { InvoiceFormValues } from "../../InvoiceForm.tsx";
+import { useFormContext, useWatch } from "react-hook-form";
 
-export type InvoiceTotalProps = {
-  control: Control<InvoiceFormValues>;
-};
+import type { InvoiceFormValues } from "@/schemas/invoice-schema";
 
-const InvoiceTotal = ({ control }: InvoiceTotalProps) => {
+const InvoiceTotal = () => {
+  const { control } = useFormContext<InvoiceFormValues>();
   const items = useWatch({ control, name: "items" });
 
   const totalItems = useMemo(() => {
