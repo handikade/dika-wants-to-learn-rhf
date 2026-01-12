@@ -7,14 +7,80 @@ body {
   background: #ddd;
 }
 
+body * {
+  font-family: sans-serif;
+}
+
 .container {
   background: #fff;
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
   min-height: 100vh;
   padding: 20px;
 }
 
-input {
+table {
   width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+td input,
+th input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+td {
+  padding: 5px;
+}
+
+.form-stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-grid input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* hr.divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0;
+} */
+
+/* h2.section-title {
+  margin: 0;
+  position: absolute;
+  padding: 0 8px;
+  background: #fff;
+  top: -14px;
+}
+
+.invoice-section {
+  border: 1px solid #57064c;
+  padding: 12px;
+}
+
+.invoice-section--with-title {
+  position: relative;
+  padding-top: 24px;
+} */
+
+.mb-12 {
+  margin-bottom: 12px;
 }
