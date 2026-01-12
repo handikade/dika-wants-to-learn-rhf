@@ -41,13 +41,7 @@ td {
   gap: 24px;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.form-grid input {
+input {
   width: 100%;
   box-sizing: border-box;
 }
