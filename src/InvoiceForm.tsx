@@ -1,6 +1,8 @@
+import Card from "@/components/Card";
 import FormDivider from "@/components/FormDivider";
 import FormTitle from "@/components/FormTitle";
 import FormVStack from "@/components/FormVStack";
+import InvoicePreview from "@/components/InvoicePreview";
 import InvoiceDetail from "@/components/forms/InvoiceDetail";
 import InvoiceItems from "@/components/forms/InvoiceItems";
 import InvoiceReceiver from "@/components/forms/InvoiceReceiver";
@@ -31,23 +33,37 @@ export default function InvoiceForm() {
     <div>
       <FormTitle>Invoice Form</FormTitle>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FormVStack>
-            <InvoiceSender />
-            <FormDivider />
-            <InvoiceReceiver />
-            <FormDivider />
-            <InvoiceDetail />
-            <FormDivider />
-            <InvoiceItems />
-          </FormVStack>
-          <hr />
-          <InvoiceTotal />
-          <hr />
-          <div style={{ textAlign: "center" }}>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "24px",
+          }}
+        >
+          <Card>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormVStack>
+                <InvoiceSender />
+                <FormDivider />
+                <InvoiceReceiver />
+                <FormDivider />
+                <InvoiceDetail />
+                <FormDivider />
+                <InvoiceItems />
+              </FormVStack>
+              <hr />
+              <InvoiceTotal />
+              <hr />
+              <div style={{ textAlign: "center" }}>
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </Card>
+
+          <Card>
+            <InvoicePreview />
+          </Card>
+        </div>
       </FormProvider>
       <hr />
     </div>

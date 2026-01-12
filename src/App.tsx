@@ -2,7 +2,7 @@ import InvoiceForm from "./InvoiceForm";
 
 function App() {
   return (
-    <div className="container">
+    <div style={{ padding: "24px" }}>
       <InvoiceForm />
     </div>
   );
